@@ -45,6 +45,26 @@
 			path = CommunityAppUITests;
 			sourceTree = "<group>";
 		};
+		C40A3DA92EC7E43E00273EED /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C40A3DAA2EC7E44600273EED /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		C40A3DAB2EC7E44D00273EED /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C40A3DAC2EC7E46000273EED /* Data */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +95,10 @@
 		C40A3D492EC7E35100273EED = {
 			isa = PBXGroup;
 			children = (
+				C40A3DAC2EC7E46000273EED /* Data */,
+				C40A3DAB2EC7E44D00273EED /* ViewModel */,
+				C40A3DAA2EC7E44600273EED /* View */,
+				C40A3DA92EC7E43E00273EED /* Model */,
 				C40A3D542EC7E35100273EED /* CommunityApp */,
 				C40A3D672EC7E35300273EED /* CommunityAppTests */,
 				C40A3D712EC7E35300273EED /* CommunityAppUITests */,
@@ -109,6 +133,10 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C40A3D542EC7E35100273EED /* CommunityApp */,
+				C40A3DA92EC7E43E00273EED /* Model */,
+				C40A3DAA2EC7E44600273EED /* View */,
+				C40A3DAB2EC7E44D00273EED /* ViewModel */,
+				C40A3DAC2EC7E46000273EED /* Data */,
 			);
 			name = CommunityApp;
 			packageProductDependencies = (
