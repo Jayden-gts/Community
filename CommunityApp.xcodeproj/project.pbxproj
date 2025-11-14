@@ -29,9 +29,33 @@
 		C40A3D6E2EC7E35300273EED /* CommunityAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommunityAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C40A3DFD2EC7EDA700273EED /* Exceptions for "CommunityApp" folder in "CommunityApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Data/CommunityApp.xcdatamodeld,
+			);
+			target = C40A3D512EC7E35100273EED /* CommunityApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		C40A3DFE2EC7EDA700273EED /* Exceptions for "CommunityApp" folder in "Compile Sources" phase from "CommunityApp" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = C40A3D4E2EC7E35100273EED /* Sources */;
+			membershipExceptions = (
+				Data/CommunityApp.xcdatamodeld,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C40A3D542EC7E35100273EED /* CommunityApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C40A3DFD2EC7EDA700273EED /* Exceptions for "CommunityApp" folder in "CommunityApp" target */,
+				C40A3DFE2EC7EDA700273EED /* Exceptions for "CommunityApp" folder in "Compile Sources" phase from "CommunityApp" target */,
+			);
 			path = CommunityApp;
 			sourceTree = "<group>";
 		};
@@ -43,26 +67,6 @@
 		C40A3D712EC7E35300273EED /* CommunityAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CommunityAppUITests;
-			sourceTree = "<group>";
-		};
-		C40A3DA92EC7E43E00273EED /* Model */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Model;
-			sourceTree = "<group>";
-		};
-		C40A3DAA2EC7E44600273EED /* View */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = View;
-			sourceTree = "<group>";
-		};
-		C40A3DAB2EC7E44D00273EED /* ViewModel */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		C40A3DAC2EC7E46000273EED /* Data */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -95,10 +99,6 @@
 		C40A3D492EC7E35100273EED = {
 			isa = PBXGroup;
 			children = (
-				C40A3DAC2EC7E46000273EED /* Data */,
-				C40A3DAB2EC7E44D00273EED /* ViewModel */,
-				C40A3DAA2EC7E44600273EED /* View */,
-				C40A3DA92EC7E43E00273EED /* Model */,
 				C40A3D542EC7E35100273EED /* CommunityApp */,
 				C40A3D672EC7E35300273EED /* CommunityAppTests */,
 				C40A3D712EC7E35300273EED /* CommunityAppUITests */,
@@ -133,10 +133,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C40A3D542EC7E35100273EED /* CommunityApp */,
-				C40A3DA92EC7E43E00273EED /* Model */,
-				C40A3DAA2EC7E44600273EED /* View */,
-				C40A3DAB2EC7E44D00273EED /* ViewModel */,
-				C40A3DAC2EC7E46000273EED /* Data */,
 			);
 			name = CommunityApp;
 			packageProductDependencies = (
