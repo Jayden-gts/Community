@@ -13,15 +13,16 @@ struct EventListView: View {
     var body: some View {
         ScrollView {
             VStack (spacing:20){
-                EventBubble(title: "Title"){
+                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
                     Text("Event Description")
                 }
-                EventBubble(title: "Title"){
+                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
                     Text("Event Description")
                 }
-                EventBubble(title: "Title"){
+                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
                     Text("Event Description")
                 }
+                
             }
            
         }

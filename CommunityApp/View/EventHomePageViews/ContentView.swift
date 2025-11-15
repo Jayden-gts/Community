@@ -11,11 +11,6 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-    
     var body: some View {
         
         VStack (spacing: 0){
@@ -24,16 +19,12 @@ struct ContentView: View {
                 EventListView()
             }.padding(.horizontal)
             
-            
         }.navigationTitle(Text("Community App"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
                 }
             }
-            
-            
-        
     }
 }
 
