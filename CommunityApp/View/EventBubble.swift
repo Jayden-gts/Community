@@ -38,7 +38,7 @@ struct EventBubble<Content: View>: View {
             }.frame(minWidth: 380,minHeight: 330, alignment: .center)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.gray, lineWidth:1))
-            .background(Color.gray.opacity(0.3))
+            .background(Color.gray.opacity(0.2))
             .cornerRadius(15)
             
         

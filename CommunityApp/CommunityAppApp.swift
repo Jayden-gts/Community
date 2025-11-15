@@ -14,7 +14,7 @@ struct CommunityAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView()
+                MainTabView()
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }

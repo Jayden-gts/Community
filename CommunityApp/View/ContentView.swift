@@ -17,13 +17,13 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     var body: some View {
+        
         VStack (spacing: 0){
             
             ScrollView {
                 EventListView()
             }.padding(.horizontal)
             
-            BottomNavBar()
             
         }.navigationTitle(Text("Community App"))
             .navigationBarTitleDisplayMode(.inline)
@@ -38,5 +38,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    MainTabView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
