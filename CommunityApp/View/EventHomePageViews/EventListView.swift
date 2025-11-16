@@ -10,22 +10,27 @@ import CoreData
 import Foundation
 
 struct EventListView: View {
+    @StateObject private var viewModel = EventViewModel()
+    @StateObject private var locationManager = LocationManager()
+
     var body: some View {
         ScrollView {
             VStack (spacing:20){
-                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
-                    Text("Event Description")
+                ForEach(viewModel.events) { event in
+                    EventBubble(
+                        event: event,
+                        destination: AnyView(EventPageView(title: event.name))
+                    )
                 }
-                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
-                    Text("Event Description")
-                }
-                EventBubble(title: "Title" ,destination: AnyView(EventPageView(title: "Pekoe!"))){
-                    Text("Event Description")
-                }
-                
             }
-           
         }
+        .onReceive(locationManager.$city){ city in
+            guard !city.isEmpty else { return }
+            viewModel.fetchEvents(city: city)
+        }
+//        .onAppear{
+//            viewModel.fetchEvents(city: "Toronto")
+//}
     }
 }
 

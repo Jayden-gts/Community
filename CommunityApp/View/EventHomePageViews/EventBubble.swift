@@ -9,14 +9,12 @@ import SwiftUI
 import CoreData
 import Foundation
 
-struct EventBubble<Content: View>: View {
-    let title: String
-    let content: Content
+struct EventBubble: View {
+    let event: Event
     let destination: AnyView
     
-    init(title: String, destination: AnyView, @ViewBuilder content: () -> Content ){
-        self.title = title
-        self.content = content()
+    init(event: Event, destination: AnyView){
+        self.event = event
         self.destination = destination
     }
     
@@ -25,16 +23,32 @@ struct EventBubble<Content: View>: View {
         NavigationLink(destination: destination){
             VStack(spacing: 30) {
                 
-                Text(title).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                HStack{
+                    Text(event.classifications?.first?.segment?.name ?? "")
+                    Text(": ")
+                    Text(event.classifications?.first?.genre?.name ?? "")
+                    
+                }
                 
-                Image("pekoe")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 350, height: 300)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                content.multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(EdgeInsets(top: 0, leading: 5, bottom: 30, trailing: 0))
+                if let imageUrl = event.images?.first?.url {
+                    AsyncImage(url: URL(string: imageUrl)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: {
+                        Color.gray.opacity(0.2)
+                    }
+                        .frame(width: 350, height: 300)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
+                HStack{
+                    Text("Date: ").fontWeight(.bold)
+                    Text(event.dates?.start?.localDate ?? "No date available")
+                    Text(",")
+                    Text(event.dates?.start?.localTime ?? "No time available")
+                }.padding(EdgeInsets(top: 0, leading: 5, bottom: 30, trailing: 0))
+                
                 
                 
             }.frame(minWidth: 380,minHeight: 330, alignment: .center)
