@@ -31,7 +31,7 @@ struct MainTabView: View {
                 }
             }
             NavigationView {
-                ContentView() //PlaceHolder for when MapView is developed.
+                MapTabView()
             }
             .tabItem {
                 VStack {
