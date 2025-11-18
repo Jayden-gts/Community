@@ -22,12 +22,21 @@ struct MainTabView: View {
             }
             
             NavigationView {
+                AddEventView() //PlaceHolder for when MapView is developed.
+            }
+            .tabItem {
+                VStack {
+                    Image(systemName: "plus")
+                    Text("New Event")
+                }
+            }
+            NavigationView {
                 ContentView() //PlaceHolder for when MapView is developed.
             }
             .tabItem {
                 VStack {
                     Image(systemName: "map.fill")
-                    Text("Map")
+                    Text("Event Map")
                 }
             }
         }
