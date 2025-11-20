@@ -16,18 +16,17 @@ class AddEventViewModel: ObservableObject {
     @Published  var eventDate: Date = Date()
     @Published  var eventTime: Date = Date()
     @Published  var eventLocation: String = ""
-    @Published  var eventImage: PhotosPickerItem?
-    @Published  var ageGroup: String = "All Ages"
-    @Published  var language: String = "English"
-    @Published var eventImageData: Data?
-    
+//    @Published  var eventImage: PhotosPickerItem?
+    @Published  var ageGroup: [String] = []
+    @Published  var language: [String] = []
+//    @Published var eventImageData: Data?
     
     @Published var isSaving = false
     @Published var errorMessage: String?
     
     var canSave : Bool {
         !eventName.isEmpty &&
-        eventImage != nil &&
+//        eventImage != nil &&
         !eventDescription.isEmpty &&
         !eventLocation.isEmpty &&
         !ageGroup.isEmpty &&
@@ -38,28 +37,43 @@ class AddEventViewModel: ObservableObject {
     
     private let eventRepo = EventRepository()
     
-    func saveEvent(ownerId: String) async {
+    func saveEvent(ownerId: String) async -> LocalEvent? {
         isSaving = true
         do{
-            let imageUrlString = try await upload(data: eventImageData)
-            
+//            let imageUrlString = try await upload(data: eventImageData)
+//            let imageUrlString = "localevent"
+
             
             let newEvent = LocalEvent(
-                id: UUID().uuidString, ownerId: ownerId, name: eventName, date: eventDate, imageUrl: imageUrlString, location: eventLocation, description: eventDescription, ageGroup: ageGroup, language: language,
+                id: UUID().uuidString,
+                ownerId: ownerId,
+                name: eventName,
+                date: eventDate,
+                imageUrl: nil,
+                location: eventLocation,
+                description: eventDescription,
+                ageGroup: ageGroup,
+                language: language,
+                time: eventTime,
+                
             )
             
             
             try await eventRepo.createEvent(newEvent)
             isSaving = false
+            return newEvent
         } catch {
+            print("Error creating event:", error)
             self.errorMessage = error.localizedDescription
             isSaving = false
+            return nil
         }
     }
     
     func upload(data: Data?) async throws -> String {
         guard let data = data else {
             throw URLError(.badServerResponse)
+            
         }
         
         let imageId = UUID().uuidString
@@ -71,11 +85,13 @@ class AddEventViewModel: ObservableObject {
         return url.absoluteString
     }
     
-    func loadImage() async {
-        
-        if let item = eventImage {
-                eventImageData = try? await item.loadTransferable(type: Data.self)
-        }
-    }
+//    func loadImage() async {
+//        
+//        if let item = eventImage {
+//                eventImageData = try? await item.loadTransferable(type: Data.self)
+//        }
+//    }
     
 }
+
+

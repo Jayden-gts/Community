@@ -16,6 +16,7 @@ struct LocalEvent: Identifiable, Codable {
     var imageUrl: String?
     var location: String
     var description: String
-    var ageGroup: String
-    var language: String
+    var ageGroup: [String]
+    var language: [String]
+    var time: Date
 }

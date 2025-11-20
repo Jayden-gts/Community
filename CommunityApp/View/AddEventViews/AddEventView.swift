@@ -13,9 +13,12 @@ import PhotosUI
 struct AddEventView: View {
     @StateObject private var vm = AddEventViewModel()
     @State private var displayedImageData: Data?
+    @ObservedObject var store: EventStore
 
-    let options = ["English", "French", "Spanish", "Punjabi", "Arabic", "Other/All"]
-        @State private var selectedOptions: Set<String> = []
+    let languageOptions = ["English", "French", "Spanish", "Punjabi", "Arabic", "Other/All"]
+    let ageOptions = ["Infants", "Children", "Teens", "Adults", "Seniors", "All Ages"]
+        @State private var selectedAgeOptions: Set<String> = []
+        @State private var selectedLanguageOptions: Set<String> = []
     let currentUserId = "currentUserId" //fix later
     var body: some View {
         Form{
@@ -24,72 +27,80 @@ struct AddEventView: View {
             TextField("Event Location", text: $vm.eventLocation)
             
             DatePicker("Date", selection: $vm.eventDate, displayedComponents: [.date, .hourAndMinute])
-            Picker("Age Group", selection: $vm.ageGroup) {
-                Text("Infants").tag("Infants")
-                Text("Children").tag("Children")
-                Text("Teens").tag("Teens")
-                Text("Adults").tag("Adults")
-                Text("Seniors").tag("Seniors")
-                Text("All Ages").tag("All Ages")
-            }
             
-            List{
-                ForEach(options, id: \.self) {option in
-                    MultipleSelectionRow(title: option , isSelected: selectedOptions.contains(option)){
-                        if selectedOptions.contains(option) {
-                            selectedOptions.remove(option)
-                        }else{
-                            selectedOptions.insert(option)
-                        }
-                    }
-                }
-            }
-            
-//            Picker("Language", selection: $vm.language) {
-//                Text("English").tag("English")
-//                Text("French").tag("French")
-//                Text("Spanish").tag("Spanish")
-//                Text("Arabic").tag("Arabic")
-//                Text("Punjabi").tag("Punjabi")
-//                Text("Other").tag("Other")
-//                Text("All").tag("All")
-//            }
-            
-            PhotosPicker(
-                selection: $vm.eventImage,
-                matching: .images,
-                photoLibrary: .shared()){
-                    VStack{
-                        if let data = vm.eventImageData,
-                           let uiImage = UIImage(data: data) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 350, height: 300)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .clipped()
-                        } else {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 15)
-                                    .fill(Color.gray.opacity(0.2))
-                                    .frame(height: 300)
-                                VStack{
-                                    Text("+")
-                                    Text("Select image for event")
-
-                                }
-                                                            }
+            Section("Age Groups"){
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12){
+                    ForEach(ageOptions, id: \.self) {option in
+                        MultipleSelectionRow(title: option , isSelected: selectedAgeOptions.contains(option)){
+                            if selectedAgeOptions.contains(option) {
+                                selectedAgeOptions.remove(option)
+                            }else{
+                                selectedAgeOptions.insert(option)
                             }
                         }
-                }.onChange(of: vm.eventImage) { _, _ in
-                    Task{
-                        let data = try? await vm.eventImage?.loadTransferable(type: Data.self)
-                        await MainActor.run{
-                            vm.eventImageData = data
-                            displayedImageData = data
+                    }
+                }
+            }
+            
+            Section("Language"){
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12){
+                    ForEach(languageOptions, id: \.self) {option in
+                        MultipleSelectionRow(title: option , isSelected: selectedLanguageOptions.contains(option)){
+                            if selectedLanguageOptions.contains(option) {
+                                selectedLanguageOptions.remove(option)
+                            }else{
+                                selectedLanguageOptions.insert(option)
+                            }
                         }
                     }
                 }
+            }
+            
+            
+//            PhotosPicker(
+//                selection: $vm.eventImage,
+//                matching: .images,
+//                photoLibrary: .shared()){
+//                    VStack{
+//                        if let data = vm.eventImageData,
+//                           let uiImage = UIImage(data: data) {
+//                            Image(uiImage: uiImage)
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                                .frame(width: 350, height: 300)
+//                                .clipShape(RoundedRectangle(cornerRadius: 15))
+//                                .clipped()
+//                        } else {
+//                            ZStack{
+//                                RoundedRectangle(cornerRadius: 15)
+//                                    .fill(Color.gray.opacity(0.2))
+//                                    .frame(height: 300)
+//                                VStack{
+//                                    Text("+")
+//                                    Text("Select image for event")
+//
+//                                }
+//                                                            }
+//                            }
+//                        }
+//                }.onChange(of: vm.eventImage) { newValue in
+//                    Task {
+//                        guard let item = newValue else { return }
+//                        do {
+//                            if let data = try await item.loadTransferable(type: Data.self) {
+//                                await MainActor.run {
+//                                    vm.eventImageData = data
+//                                    displayedImageData = data
+//                                    print("Loaded image data size: \(data.count)")
+//                                }
+//                            } else {
+//                                print("Failed to load image data: nil")
+//                            }
+//                        } catch {
+//                            print("Error loading image: \(error)")
+//                        }
+//                    }
+//                }
                 
 
             
@@ -99,13 +110,17 @@ struct AddEventView: View {
             
             Button("Save"){
                 Task {
-                    await vm.saveEvent(ownerId: currentUserId)
+//                    print("vm.eventImageData size before save: \(vm.eventImageData?.count ?? 0)")
+
+                    if let newEvent = await vm.saveEvent(ownerId: currentUserId){
+                        await store.addEvent(newEvent)
+                        print("Saved event:", newEvent.name)
+                    }else {
+                        print("Failed to save event")
+                    }
                 }
             }
         }.navigationTitle(Text("Add New Event"))
     }
 }
 
-#Preview {
-    AddEventView()
-}

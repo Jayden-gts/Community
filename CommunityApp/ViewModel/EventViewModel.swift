@@ -16,6 +16,7 @@ class EventViewModel: ObservableObject {
         let apiKey = "LRQC0K5dMrAim5j1fCEpTcbsthsAUaWZ"
       
         let url = "https://app.ticketmaster.com/discovery/v2/events.json?city=\(city)&apikey=\(apiKey)"
+        
 
         guard let urlRequest = URL(string: url) else {return}
         var request = URLRequest(url:urlRequest)
@@ -31,7 +32,7 @@ class EventViewModel: ObservableObject {
             guard let data = data else { return }
             
             if let str = String(data: data, encoding: .utf8) {
-                print("Raw API response:", str)
+                
             }
             
             do {

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDLQKvyYq0qMSljE15meAa7YCOdmbAXTwc</string>
+	<string>AIzaSyDxhpE5E4GTEs0OVgQCWs2QltKua_uPM-8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>417741271646</string>
+	<string>799809211572</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.JaydenSetoApps.CommunityApp</string>
 	<key>PROJECT_ID</key>
-	<string>communityapp-98a12</string>
+	<string>communityappfree</string>
 	<key>STORAGE_BUCKET</key>
-	<string>communityapp-98a12.firebasestorage.app</string>
+	<string>communityappfree.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:417741271646:ios:86ac8fe61dc69a8a2b3acf</string>
+	<string>1:799809211572:ios:6ba500f7d3359cbce61be1</string>
 </dict>
 </plist>

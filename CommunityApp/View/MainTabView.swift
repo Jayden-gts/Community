@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject private var store = EventStore()
     var body: some View {
         
         TabView {
@@ -22,7 +23,7 @@ struct MainTabView: View {
             }
             
             NavigationView {
-                AddEventView() //PlaceHolder for when MapView is developed.
+                AddEventView(store: store)
             }
             .tabItem {
                 VStack {

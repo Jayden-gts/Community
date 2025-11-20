@@ -12,10 +12,22 @@ import Foundation
 struct EventListView: View {
     @StateObject private var viewModel = EventViewModel()
     @StateObject private var locationManager = LocationManager()
-
+    @StateObject private var store = EventStore()
+    @State private var currentCity: String = ""
     var body: some View {
         ScrollView {
             VStack (spacing:20){
+
+                ForEach(store.events) { event in
+                    EventBubble(
+                        event: event,
+                        destination: AnyView(EventPageView(title: event.name))
+                    )
+                }
+
+
+
+
                 ForEach(viewModel.events) { event in
                     EventBubble(
                         event: event,
@@ -26,11 +38,14 @@ struct EventListView: View {
         }
         .onReceive(locationManager.$city){ city in
             guard !city.isEmpty else { return }
+            currentCity = city
             viewModel.fetchEvents(city: city)
+            
         }
-//        .onAppear{
-//            viewModel.fetchEvents(city: "Toronto")
-//}
+        .onAppear{
+            store.startListening()
+            
+        }
     }
 }
 

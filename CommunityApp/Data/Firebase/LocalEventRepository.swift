@@ -22,4 +22,20 @@ final class EventRepository {
             try? doc.data(as: LocalEvent.self)
         }
     }
+    
+    func listenForEvents() -> AsyncStream<[LocalEvent]> {
+        AsyncStream { continuation in
+            db.collection("events")
+                .addSnapshotListener { snapshot, error in
+                    if let error = error {
+                        print("Firestore listener error:", error.localizedDescription)
+                        return
+                    }
+                    guard let snapshot = snapshot else { return }
+                    let events = snapshot.documents.compactMap { try? $0.data(as: LocalEvent.self) }
+                    print("Firestore snapshot count:", events.count)
+                    continuation.yield(events)
+                }
+        }
+    }
 }

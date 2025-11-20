@@ -6,11 +6,16 @@
 //
 import Firebase
 import SwiftUI
+import FirebaseCore
+import FirebaseStorage
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
+      let storage = Storage.storage()
+      print(storage.reference().bucket)
+
 
     return true
   }
