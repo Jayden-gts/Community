@@ -30,6 +30,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
         case .authorizedWhenInUse, .authorizedAlways:
             
             manager.startUpdatingLocation()
+            break
         case .denied, .restricted:
             
             print("Location access denied or restricted.")

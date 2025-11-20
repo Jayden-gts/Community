@@ -8,26 +8,64 @@
 import SwiftUI
 import Foundation
 import PhotosUI
+import MapKit
 
 
 struct AddEventView: View {
     @StateObject private var vm = AddEventViewModel()
+    @StateObject var locationManager = LocationManager()
     @State private var displayedImageData: Data?
     @ObservedObject var store: EventStore
-
+    @FocusState private var isFocused: Bool
+    
     let languageOptions = ["English", "French", "Spanish", "Punjabi", "Arabic", "Other/All"]
     let ageOptions = ["Infants", "Children", "Teens", "Adults", "Seniors", "All Ages"]
-        @State private var selectedAgeOptions: Set<String> = []
-        @State private var selectedLanguageOptions: Set<String> = []
+    @State private var selectedAgeOptions: Set<String> = []
+    @State private var selectedLanguageOptions: Set<String> = []
     let currentUserId = "currentUserId" //fix later
     var body: some View {
         Form{
             TextField("Event Name", text: $vm.eventName)
-            
-            TextField("Event Location", text: $vm.eventLocation)
-            
+            VStack{
+                TextField("Event Location", text: $vm.eventLocation)
+                    .onChange(of: vm.eventLocation) { newValue in
+                        vm.updateSearch(query: newValue)
+                    }
+                    
+                    .padding(.vertical, 4)
+                    .focused($isFocused)
+                
+                if !vm.searchResults.isEmpty && isFocused {
+                    ScrollView{
+                        VStack(alignment: .leading, spacing: 0){
+                            ForEach(vm.searchResults, id: \.self) {result in
+                                Button {
+                                    vm.eventLocation = result.title + ", " + result.subtitle
+                                    vm.searchResults = []
+                                    isFocused = false
+                                } label : {
+                                    VStack(alignment: .leading) {
+                                        Text(result.title)
+                                        if !result.subtitle.isEmpty {
+                                            Text(result.subtitle).foregroundColor(.secondary)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .frame(maxHeight: 200)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .background(Color(UIColor.systemBackground))
+                    .cornerRadius(8)
+                    .shadow(radius: 2)
+                    .zIndex(1)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             DatePicker("Date", selection: $vm.eventDate, displayedComponents: [.date, .hourAndMinute])
-            
             Section("Age Groups"){
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12){
                     ForEach(ageOptions, id: \.self) {option in
@@ -41,7 +79,6 @@ struct AddEventView: View {
                     }
                 }
             }
-            
             Section("Language"){
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3), spacing: 12){
                     ForEach(languageOptions, id: \.self) {option in
@@ -55,63 +92,14 @@ struct AddEventView: View {
                     }
                 }
             }
-            
-            
-//            PhotosPicker(
-//                selection: $vm.eventImage,
-//                matching: .images,
-//                photoLibrary: .shared()){
-//                    VStack{
-//                        if let data = vm.eventImageData,
-//                           let uiImage = UIImage(data: data) {
-//                            Image(uiImage: uiImage)
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fill)
-//                                .frame(width: 350, height: 300)
-//                                .clipShape(RoundedRectangle(cornerRadius: 15))
-//                                .clipped()
-//                        } else {
-//                            ZStack{
-//                                RoundedRectangle(cornerRadius: 15)
-//                                    .fill(Color.gray.opacity(0.2))
-//                                    .frame(height: 300)
-//                                VStack{
-//                                    Text("+")
-//                                    Text("Select image for event")
-//
-//                                }
-//                                                            }
-//                            }
-//                        }
-//                }.onChange(of: vm.eventImage) { newValue in
-//                    Task {
-//                        guard let item = newValue else { return }
-//                        do {
-//                            if let data = try await item.loadTransferable(type: Data.self) {
-//                                await MainActor.run {
-//                                    vm.eventImageData = data
-//                                    displayedImageData = data
-//                                    print("Loaded image data size: \(data.count)")
-//                                }
-//                            } else {
-//                                print("Failed to load image data: nil")
-//                            }
-//                        } catch {
-//                            print("Error loading image: \(error)")
-//                        }
-//                    }
-//                }
-                
-
-            
-            
             TextField("Event Description", text: $vm.eventDescription, axis: .vertical)
                 .lineLimit(5...10)
             
             Button("Save"){
+                vm.ageGroup = Array(selectedAgeOptions)
+                    vm.language = Array(selectedLanguageOptions)
+                    vm.eventTime = vm.eventDate
                 Task {
-//                    print("vm.eventImageData size before save: \(vm.eventImageData?.count ?? 0)")
-
                     if let newEvent = await vm.saveEvent(ownerId: currentUserId){
                         await store.addEvent(newEvent)
                         print("Saved event:", newEvent.name)
@@ -120,7 +108,13 @@ struct AddEventView: View {
                     }
                 }
             }
-        }.navigationTitle(Text("Add New Event"))
+        }
+        .onAppear {
+                vm.setInitialSearchRegion(lat: locationManager.lat, lon: locationManager.lon)
+            }
     }
 }
+
+
+
 
