@@ -29,7 +29,6 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
     var canSave : Bool {
 
         !eventName.isEmpty &&
-//        eventImage != nil &&
         !eventDescription.isEmpty &&
         !eventLocation.isEmpty &&
         !ageGroup.isEmpty &&

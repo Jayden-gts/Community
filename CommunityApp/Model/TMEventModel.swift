@@ -24,6 +24,20 @@ struct Event: Decodable, Identifiable {
     
 }
 
+struct Venues: Decodable {
+    let name: String?
+    let address: VenueAddress?
+    let location: location?
+}
+
+struct VenueAddress: Decodable {
+    let line1: String?
+}
+
+struct location: Decodable {
+    let longitude: String?
+    let latitude: String?
+}
 
 struct EventDates: Decodable {
     let start: EventStartDates?

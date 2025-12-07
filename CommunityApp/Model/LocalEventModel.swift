@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import PhotosUI
 
 struct LocalEvent: Identifiable, Codable {
     var id: String
