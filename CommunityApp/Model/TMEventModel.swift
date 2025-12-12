@@ -11,7 +11,13 @@ struct TicketMasterResponse: Decodable {
 
 struct EmbeddedEvents: Decodable {
     let events: [Event]
+    
 }
+struct EventEmbedded: Decodable {
+    let venues: [Venue]
+    
+}
+
 
 struct Event: Decodable, Identifiable {
     let id: String
@@ -21,18 +27,31 @@ struct Event: Decodable, Identifiable {
     let classifications: [EventClassification]?
     let dates: EventDates?
     let images: [EventImage]?
-    
+    let _embedded: EventEmbedded?
 }
 
-struct Venues: Decodable {
+struct Venue: Decodable {
     let name: String?
     let address: VenueAddress?
-    let location: location?
+    let city: VenueCity?
+    let state: VenueState?
+    let country: VenueCountry?
 }
 
-struct VenueAddress: Decodable {
-    let line1: String?
-}
+struct VenueAddress: Decodable { let line1: String? }
+struct VenueCity: Decodable { let name: String? }
+struct VenueState: Decodable { let name: String?; let stateCode: String? }
+struct VenueCountry: Decodable { let name: String? }
+
+//struct Venues: Decodable {
+//    let name: String?
+//    let address: VenueAddress?
+//    let location: location?
+//}
+//
+//struct VenueAddress: Decodable {
+//    let line1: String?
+//}
 
 struct location: Decodable {
     let longitude: String?

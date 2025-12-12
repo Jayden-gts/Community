@@ -21,19 +21,17 @@ struct EventListView: View {
                 ForEach(store.events) { event in
                     EventBubble(
                         event: event,
-                        destination: AnyView(EventPageView(title: event.name))
+                        destination: AnyView(EventPageView(event: event))
                     )
                 }
 
-
-
-
-                ForEach(viewModel.events) { event in
+                ForEach(viewModel.events as! [Event]) { event in
                     EventBubble(
                         event: event,
-                        destination: AnyView(EventPageView(title: event.name))
+                        destination: AnyView(EventPageView(event: event))
                     )
                 }
+
             }
         }
         .onReceive(locationManager.$city){ city in

@@ -16,17 +16,31 @@ protocol AnyEvent: Identifiable {
     var location: String { get }
     var genreString: String { get }
     var segmentString: String { get }
+    var url: String? { get }
 }
 
 extension Event: AnyEvent {
+    var eventUrl: String? { self.url }
     var imageUrl: String? { images?.first?.url }
     var dateString: String { dates?.start?.localDate ?? "No date available" }
     var timeString: String { dates?.start?.localTime ?? "No time available" }
-    var location: String { "" }
+
+    var location: String {
+        guard let venue = _embedded?.venues.first else { return "" }
+
+        let line = venue.address?.line1 ?? ""
+        let city = venue.city?.name ?? ""
+        let state = venue.state?.name ?? ""
+        let country = venue.country?.name ?? ""
+
+        return [line, city, state, country].compactMap { $0.isEmpty ? nil : $0 }
+            .joined(separator: ", ")
+    }
+
     var genreString: String { classifications?.first?.genre?.name ?? "" }
     var segmentString: String { classifications?.first?.segment?.name ?? "" }
-    
 }
+
 
 extension LocalEvent: AnyEvent {
     var dateString: String {
@@ -39,4 +53,5 @@ extension LocalEvent: AnyEvent {
     
     var genreString: String { ageGroup.joined(separator: ", ") }
     var segmentString: String { language.joined(separator: ", ") }
+    var url: String? { nil }
 }

@@ -10,35 +10,70 @@ import CoreData
 import Foundation
 
 struct EventPageView: View {
-    let title: String
+    let event: any AnyEvent
     
     
     
-    init(title: String){
-        self.title = title
-        
-    }
+    
     var body: some View {
-            VStack() {
+        VStack(alignment: .center) {
                 
-                Text(title).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                 
-                    Image("pekoe")
+                
+                if event is LocalEvent {
+                    Image("localeventpekoe")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 350, height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
                 
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
+                if event is Event {
+                    if let urlString = event.imageUrl,
+                       let url = URL(string: urlString) {
+                        
+                        AsyncImage(url: url) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            case .failure:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                        .frame(width: 350, height: 300)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                    
+                }
+                    
+                
+                Text("").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
                 
                 Text("Event Details").font(.headline).padding(EdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 0))
-                Text("Date: ")
-                Text("Time: ")
-                Text("Age range: ")
-                Text("Cost: ")
-                Text("Address: ")
+                Text("Date: \(event.dateString)")
+                Text("Time: \(event.timeString)")
+                if event is LocalEvent {
+                    Text("Age Range: \(event.genreString)")
+                    Text("Language(s): \(event.segmentString)")
+                } else {
+                    Text("Genre: \(event.genreString)")
+                    Text("Genre: \(event.segmentString)")
+                }
+                Text("Address: \(event.location)").padding(.bottom, event is LocalEvent ? 20 : 0)
+            
+            if event is Event {
+                Link("Check out the site for more details!", destination: URL(string: event.url ?? "")!).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+            }
                 
-                Link("Check out the site for more details!", destination: URL(string: "https://www.apple.com")!).padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                     
             }.frame(minWidth: 380,maxWidth: 380,minHeight: 500 ,alignment: .center)
             .background(RoundedRectangle(cornerRadius: 15)
@@ -47,9 +82,6 @@ struct EventPageView: View {
             .cornerRadius(15)
             .navigationTitle(Text("Community App"))
                 .navigationBarTitleDisplayMode(.inline)
+                
     }
-}
-
-#Preview {
-    EventPageView(title: "Event")
 }
