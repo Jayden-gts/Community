@@ -24,6 +24,7 @@ struct AddEventView: View {
     @State private var selectedAgeOptions: Set<String> = []
     @State private var selectedLanguageOptions: Set<String> = []
     let currentUserId = "currentUserId" //fix later
+    
     var body: some View {
         Form{
             TextField("Event Name", text: $vm.eventName)

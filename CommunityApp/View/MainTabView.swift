@@ -9,6 +9,29 @@ import SwiftUI
 
 struct MainTabView: View {
     @StateObject private var store = EventStore()
+    init() {
+        let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.systemBackground
+            
+            // Selected icon + text color
+            appearance.stackedLayoutAppearance.selected.iconColor = UIColor(
+                red: 50/255,
+                green: 100/255,
+                blue: 30/255,
+                alpha: 1.0
+            )
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                .foregroundColor: UIColor(
+                    red: 50/255,
+                    green: 100/255,
+                    blue: 30/255,
+                    alpha: 1.0
+                )
+            ]
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
     var body: some View {
         
         TabView {

@@ -16,8 +16,10 @@ struct EventPageView: View {
     var body: some View {
         VStack(alignment: .center) {
                 
-            Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)).foregroundColor(Color.blue) .fontWeight(.bold)
-            Group{
+            Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)).foregroundStyle(Color(red: 50/255, green: 100/255, blue: 30/255)).font(.system(size: 24))
+ .fontWeight(.bold)
+            
+            Group {
                 if let imageStr = event.imageUrl, !imageStr.isEmpty {
                     if imageStr.starts(with: "http") {
                         AsyncImage(url: URL(string: imageStr)) { phase in
@@ -27,11 +29,11 @@ struct EventPageView: View {
                             case .success(let image):
                                 image
                                     .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                    .scaledToFill()
                             case .failure:
                                 Image("localeventpekoe")
                                     .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                    .scaledToFill()
                             @unknown default:
                                 EmptyView()
                             }
@@ -39,21 +41,20 @@ struct EventPageView: View {
                     } else {
                         Image(imageStr)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .scaledToFill()
                     }
                 } else {
-                    Image("localeventpekoe") // fallback image
+                    Image("localeventpekoe")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                 }
             }
-                        .frame(width: 350, height: 300)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-            
-                    
+            .frame(width: 350, height: 300)
+            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+     
                 if event is LocalEvent {
                     Text("\(event.eventDescription ?? "No description")").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
-
             }
                 
                 Text("Event Details").font(.headline).padding(EdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 0))
@@ -72,14 +73,19 @@ struct EventPageView: View {
                 Link("Check out the site for more details!", destination: URL(string: event.url ?? "")!).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
                 
+            
+                
+                
                     
             }.frame(minWidth: 380,maxWidth: 380,minHeight: 500 ,alignment: .center)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.gray, lineWidth:1))
-            .background(Color.gray.opacity(0.2))
+            .background(Color(.systemGray6))
             .cornerRadius(15)
-            .navigationTitle(Text("Community App"))
-                .navigationBarTitleDisplayMode(.inline)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color(red: 50/255, green: 100/255, blue: 30/255), lineWidth: 2)
+            )
                 
     }
 }

@@ -18,7 +18,8 @@ struct ContentView: View {
                 EventListView()
             }.padding(.horizontal)
             
-        }.navigationTitle(Text("Community App"))
+        }.navigationTitle(Text("Events"))
+            .foregroundStyle(Color(red: 50/255, green: 100/255, blue: 30/255))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){

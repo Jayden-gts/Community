@@ -12,18 +12,15 @@ import Foundation
 struct EventBubble: View {
     let event: any AnyEvent
     let destination: AnyView
-    
-//    init(event: Event, destination: AnyView){
-//        self.event = event
-//        self.destination = destination
-//    }
-    
-    
+        
     var body: some View {
         NavigationLink(destination: destination){
-            VStack(spacing: 30) {
+            VStack(spacing: 20) {
                 
-                Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)).fontWeight(.bold)
+                Text(event.name)
+                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                    .fontWeight(.bold)
+                    .font(.system(size: 24))
                 HStack{
                     if !event.segmentString.isEmpty {
                         Text(event.segmentString).bold()
@@ -47,7 +44,6 @@ struct EventBubble: View {
                             .aspectRatio(contentMode: .fill)
                     }
                 } else {
-                    
                     Image("localeventpekoe")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -60,19 +56,15 @@ struct EventBubble: View {
                     Text(event.dateString + ",")
                     Text(event.timeString)
                 }.padding(EdgeInsets(top: 0, leading: 5, bottom: 30, trailing: 0))
-                
-                
-                
             }.frame(minWidth: 380,minHeight: 330, alignment: .center)
+                .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color(red: 50/255, green: 100/255, blue: 30/255), lineWidth: 5))
                 .background(RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.gray, lineWidth:1))
-                .background(Color(.systemGray6)
-)
-
+                .background(Color(.systemGray6))
                 .cornerRadius(15)
-            
-        }
-        
+        }.foregroundStyle(Color(red: 50/255, green: 100/255, blue: 30/255))
     }
 }
 
