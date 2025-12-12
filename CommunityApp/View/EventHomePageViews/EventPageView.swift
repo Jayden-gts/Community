@@ -13,27 +13,14 @@ struct EventPageView: View {
     let event: any AnyEvent
     
     
-    
-    
     var body: some View {
         VStack(alignment: .center) {
                 
-                Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
-                
-                
-                if event is LocalEvent {
-                    Image("localeventpekoe")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 350, height: 300)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
-                
-                if event is Event {
-                    if let urlString = event.imageUrl,
-                       let url = URL(string: urlString) {
-                        
-                        AsyncImage(url: url) { phase in
+            Text(event.name).padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)).foregroundColor(Color.blue) .fontWeight(.bold)
+            Group{
+                if let imageStr = event.imageUrl, !imageStr.isEmpty {
+                    if imageStr.starts(with: "http") {
+                        AsyncImage(url: URL(string: imageStr)) { phase in
                             switch phase {
                             case .empty:
                                 ProgressView()
@@ -42,18 +29,27 @@ struct EventPageView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                             case .failure:
-                                Image(systemName: "photo")
+                                Image("localeventpekoe")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                             @unknown default:
                                 EmptyView()
                             }
                         }
+                    } else {
+                        Image(imageStr)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    }
+                } else {
+                    Image("localeventpekoe") // fallback image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
                         .frame(width: 350, height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
-                    }
-                    
-                }
+            
                     
                 if event is LocalEvent {
                     Text("\(event.eventDescription ?? "No description")").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
@@ -70,7 +66,7 @@ struct EventPageView: View {
                     Text("Subgenre: \(event.genreString)")
                     Text("Genre: \(event.segmentString)")
                 }
-                Text("Address: \(event.location)").padding(.bottom, event is LocalEvent ? 20 : 0)
+                Text("Address: \(event.location)").padding(.bottom, event is LocalEvent ? 20 : 0).multilineTextAlignment(.center)
             
             if event is Event {
                 Link("Check out the site for more details!", destination: URL(string: event.url ?? "")!).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))

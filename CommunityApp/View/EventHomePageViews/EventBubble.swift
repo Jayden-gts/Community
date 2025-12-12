@@ -33,24 +33,28 @@ struct EventBubble: View {
                     }
                     
                 }
-                
-                if let urlString = event.imageUrl, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { image in
-                        image
+                Group{
+                if let imageStr = event.imageUrl, !imageStr.isEmpty {
+                    if imageStr.starts(with: "http") {
+                        AsyncImage(url: URL(string: imageStr)) { image in
+                            image.resizable().aspectRatio(contentMode: .fill)
+                        } placeholder: {
+                            Color.gray.opacity(0.2)
+                        }
+                    } else {
+                        Image(imageStr)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        Color.gray.opacity(0.2)
                     }
-                        .frame(width: 350, height: 300)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }else{
+                } else {
+                    
                     Image("localeventpekoe")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 350, height: 300)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                 }
+            }
+                .frame(width: 350, height: 300)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
                 HStack{
                     Text("Date: ").fontWeight(.bold)
                     Text(event.dateString + ",")
@@ -62,7 +66,9 @@ struct EventBubble: View {
             }.frame(minWidth: 380,minHeight: 330, alignment: .center)
                 .background(RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.gray, lineWidth:1))
-                .background(Color.gray.opacity(0.2))
+                .background(Color(.systemGray6)
+)
+
                 .cornerRadius(15)
             
         }

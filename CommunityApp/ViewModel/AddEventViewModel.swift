@@ -21,7 +21,7 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
     @Published  var ageGroup: [String] = []
     @Published  var language: [String] = []
     @Published var eventCity: String = ""
-
+    @Published var selectedImageName: String? = nil
     @Published var isSaving = false
     @Published var errorMessage: String?
     
@@ -99,14 +99,13 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
                 ownerId: ownerId,
                 name: eventName,
                 date: eventDate,
-                imageUrl: nil,
+                imageUrl: selectedImageName,
                 location: eventLocation,
                 description: eventDescription,
                 ageGroup: ageGroup,
                 language: language,
                 time: eventTime,
-                city: eventCity
-                
+                city: eventCity,
             )
             
             

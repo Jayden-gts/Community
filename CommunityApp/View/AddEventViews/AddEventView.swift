@@ -18,7 +18,6 @@ struct AddEventView: View {
     @ObservedObject var store: EventStore
     @FocusState private var isFocused: Bool
     @State private var showAlert = false
-
     
     let languageOptions = ["English", "French", "Spanish", "Punjabi", "Arabic", "Other/All"]
     let ageOptions = ["Infants", "Children", "Teens", "Adults", "Seniors", "All Ages"]
@@ -101,6 +100,32 @@ struct AddEventView: View {
                     }
                 }
             }
+            Section("Event Image") {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        
+                        let imageNames = ["allAges", "babies", "children", "teens", "adults", "oldPeople", "localeventpekoe"]
+                        
+                        ForEach(imageNames, id: \.self) { name in
+                            Image(name)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 100)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(vm.selectedImageName == name ? Color.blue : Color.clear, lineWidth: 3)
+                                )
+                                .onTapGesture {
+                                    vm.selectedImageName = name
+                                }
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+            
+            
             TextField("Event Description", text: $vm.eventDescription, axis: .vertical)
                 .lineLimit(5...10)
             
