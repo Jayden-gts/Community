@@ -55,8 +55,10 @@ struct EventPageView: View {
                     
                 }
                     
-                
-                Text("").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
+                if event is LocalEvent {
+                    Text("\(event.eventDescription ?? "No description")").padding(EdgeInsets(top: 20, leading: 10, bottom: 10, trailing: 10))
+
+            }
                 
                 Text("Event Details").font(.headline).padding(EdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 0))
                 Text("Date: \(event.dateString)")
@@ -65,7 +67,7 @@ struct EventPageView: View {
                     Text("Age Range: \(event.genreString)")
                     Text("Language(s): \(event.segmentString)")
                 } else {
-                    Text("Genre: \(event.genreString)")
+                    Text("Subgenre: \(event.genreString)")
                     Text("Genre: \(event.segmentString)")
                 }
                 Text("Address: \(event.location)").padding(.bottom, event is LocalEvent ? 20 : 0)

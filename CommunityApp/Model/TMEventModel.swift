@@ -18,7 +18,6 @@ struct EventEmbedded: Decodable {
     
 }
 
-
 struct Event: Decodable, Identifiable {
     let id: String
     let name: String
@@ -42,16 +41,6 @@ struct VenueAddress: Decodable { let line1: String? }
 struct VenueCity: Decodable { let name: String? }
 struct VenueState: Decodable { let name: String?; let stateCode: String? }
 struct VenueCountry: Decodable { let name: String? }
-
-//struct Venues: Decodable {
-//    let name: String?
-//    let address: VenueAddress?
-//    let location: location?
-//}
-//
-//struct VenueAddress: Decodable {
-//    let line1: String?
-//}
 
 struct location: Decodable {
     let longitude: String?

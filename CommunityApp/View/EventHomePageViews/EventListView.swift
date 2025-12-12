@@ -18,7 +18,7 @@ struct EventListView: View {
         ScrollView {
             VStack (spacing:20){
 
-                ForEach(store.events) { event in
+                ForEach(store.events.filter { $0.city == currentCity }) { event in
                     EventBubble(
                         event: event,
                         destination: AnyView(EventPageView(event: event))

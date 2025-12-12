@@ -18,4 +18,5 @@ struct LocalEvent: Identifiable, Codable {
     var ageGroup: [String]
     var language: [String]
     var time: Date
+    var city: String
 }

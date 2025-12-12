@@ -53,8 +53,7 @@ struct EventBubble: View {
                 }
                 HStack{
                     Text("Date: ").fontWeight(.bold)
-                    Text(event.dateString)
-                    Text(",")
+                    Text(event.dateString + ",")
                     Text(event.timeString)
                 }.padding(EdgeInsets(top: 0, leading: 5, bottom: 30, trailing: 0))
                 

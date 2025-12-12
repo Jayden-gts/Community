@@ -20,7 +20,8 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
     @Published  var eventLocation: String = ""
     @Published  var ageGroup: [String] = []
     @Published  var language: [String] = []
-    
+    @Published var eventCity: String = ""
+
     @Published var isSaving = false
     @Published var errorMessage: String?
     
@@ -104,6 +105,7 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
                 ageGroup: ageGroup,
                 language: language,
                 time: eventTime,
+                city: eventCity
                 
             )
             

@@ -17,6 +17,7 @@ protocol AnyEvent: Identifiable {
     var genreString: String { get }
     var segmentString: String { get }
     var url: String? { get }
+    var eventDescription: String? { get }
 }
 
 extension Event: AnyEvent {
@@ -36,7 +37,7 @@ extension Event: AnyEvent {
         return [line, city, state, country].compactMap { $0.isEmpty ? nil : $0 }
             .joined(separator: ", ")
     }
-
+    var eventDescription: String? { nil }
     var genreString: String { classifications?.first?.genre?.name ?? "" }
     var segmentString: String { classifications?.first?.segment?.name ?? "" }
 }
@@ -50,7 +51,7 @@ extension LocalEvent: AnyEvent {
         DateFormatter.localizedString(from: time, dateStyle: .none, timeStyle: .short)
     }
     var locationString: String { location }
-    
+    var eventDescription: String? { description }
     var genreString: String { ageGroup.joined(separator: ", ") }
     var segmentString: String { language.joined(separator: ", ") }
     var url: String? { nil }

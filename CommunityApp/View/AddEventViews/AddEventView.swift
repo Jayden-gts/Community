@@ -17,6 +17,8 @@ struct AddEventView: View {
     @State private var displayedImageData: Data?
     @ObservedObject var store: EventStore
     @FocusState private var isFocused: Bool
+    @State private var showAlert = false
+
     
     let languageOptions = ["English", "French", "Spanish", "Punjabi", "Arabic", "Other/All"]
     let ageOptions = ["Infants", "Children", "Teens", "Adults", "Seniors", "All Ages"]
@@ -43,6 +45,13 @@ struct AddEventView: View {
                                     vm.eventLocation = result.title + ", " + result.subtitle
                                     vm.searchResults = []
                                     isFocused = false
+                                    
+                                    let subtitleParts = result.subtitle.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+                                            if subtitleParts.count >= 1 {
+                                                vm.eventCity = String(subtitleParts[0])
+                                            } else {
+                                                vm.eventCity = ""
+                                            }
                                 } label : {
                                     VStack(alignment: .leading) {
                                         Text(result.title)
@@ -103,11 +112,24 @@ struct AddEventView: View {
                     if let newEvent = await vm.saveEvent(ownerId: currentUserId){
                         await store.addEvent(newEvent)
                         print("Saved event:", newEvent.name)
+                        vm.eventName = ""
+                        vm.eventLocation = ""
+                        vm.eventDescription = ""
+                        vm.eventDate = Date()
+                        selectedAgeOptions.removeAll()
+                        selectedLanguageOptions.removeAll()
+                        displayedImageData = nil
+                        showAlert = true
                     }else {
                         print("Failed to save event")
                     }
                 }
             }
+        }
+        .alert("Event Posted!", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Your event has been successfully added.")
         }
         .onAppear {
                 vm.setInitialSearchRegion(lat: locationManager.lat, lon: locationManager.lon)
