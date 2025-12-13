@@ -14,16 +14,18 @@ struct ContentView: View {
     var body: some View {
         
         VStack (spacing: 0){
+            HStack{
+                Text("Commun").font(.system(size: 30)) + Text("IT").foregroundStyle(Color(red: 50/255, green: 100/255, blue: 30/255)).font(.system(size: 30, weight: .bold, design: .default))
+            }.padding(EdgeInsets(top: 0, leading: 5, bottom: 30, trailing: 0))
+            
             ScrollView {
                 EventListView()
             }.padding(.horizontal)
             
-        }.navigationTitle(Text("Events"))
-            .foregroundStyle(Color(red: 50/255, green: 100/255, blue: 30/255))
+        }.navigationTitle(Text(""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
-                    
                 }
             }
     }
