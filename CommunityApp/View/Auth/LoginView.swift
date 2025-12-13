@@ -5,6 +5,10 @@
 //  Created by Laiba Ahmed on 2025-12-13.
 //
 
+
+// add the errors and make it look prettier with UI and stuff 
+
+
 import SwiftUI
 
 struct LoginView: View  {

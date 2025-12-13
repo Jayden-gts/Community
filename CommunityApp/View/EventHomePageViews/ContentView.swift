@@ -11,6 +11,9 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @EnvironmentObject var session: SessionManager
+
+    
     var body: some View {
         
         VStack (spacing: 0){
@@ -26,6 +29,11 @@ struct ContentView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
+                    //edited by laiba
+                    NavigationLink(destination: ProfileDataView().environmentObject(session)) {
+                        Image(systemName: "person.circle.fill")
+                            .font(.title)
+                    }
                 }
             }
     }
