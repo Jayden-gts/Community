@@ -2,7 +2,7 @@
 //  EventListVeiw.swift
 //  CommunityApp
 //
-//  Created by Jayden Seto on 2025-11-14.
+//  Created by Jayden Seto on 2025-11-14.991746683
 //
 
 import SwiftUI
@@ -18,7 +18,7 @@ struct EventListView: View {
         ScrollView {
             VStack (spacing:20){
 
-                ForEach(store.events.filter { $0.city == currentCity }) { event in
+                ForEach(store.events) { event in
                     EventBubble(
                         event: event,
                         destination: AnyView(EventPageView(event: event, eventStore: store))

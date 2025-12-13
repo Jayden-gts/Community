@@ -2,7 +2,7 @@
 //  EventPageViewModel.swift
 //  CommunityApp
 //
-//  Created by Jayden Seto on 2025-12-13.
+//  Created by Jayden Seto on 2025-12-13.991746683
 //
 
 import Foundation
