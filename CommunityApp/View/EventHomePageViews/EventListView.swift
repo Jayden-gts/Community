@@ -21,14 +21,14 @@ struct EventListView: View {
                 ForEach(store.events.filter { $0.city == currentCity }) { event in
                     EventBubble(
                         event: event,
-                        destination: AnyView(EventPageView(event: event))
+                        destination: AnyView(EventPageView(event: event, eventStore: store))
                     )
                 }
 
-                ForEach(viewModel.events as! [Event]) { event in
+                ForEach(viewModel.events) { event in
                     EventBubble(
                         event: event,
-                        destination: AnyView(EventPageView(event: event))
+                        destination: AnyView(EventPageView(event: event, eventStore: store))
                     )
                 }
 

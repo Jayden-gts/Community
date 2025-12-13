@@ -31,5 +31,15 @@ class EventStore: ObservableObject {
             }
     }
     
+    func deleteEvent(_ event: LocalEvent) async {
+        events.removeAll { $0.id == event.id }
+
+        do {
+            try await repository.deleteEvent(event)
+        } catch {
+            print("Failed to delete event:", error)
+            events.insert(event, at: 0)
+        }
+    }
 }
 

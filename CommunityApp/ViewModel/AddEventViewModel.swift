@@ -108,7 +108,7 @@ class AddEventViewModel: NSObject, ObservableObject, MKLocalSearchCompleterDeleg
                 city: eventCity,
             )
             
-            
+        
             try await eventRepo.createEvent(newEvent)
             isSaving = false
             return newEvent

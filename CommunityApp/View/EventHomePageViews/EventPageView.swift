@@ -11,7 +11,16 @@ import Foundation
 
 struct EventPageView: View {
     let event: any AnyEvent
+    @EnvironmentObject var eventStore: EventStore
+    @StateObject private var vm: EventPageViewModel
+    @State private var showDeleteAlert = false
+    @Environment(\.dismiss) private var dismiss
     
+    init(event: any AnyEvent, eventStore: EventStore) {
+            self.event = event
+            _vm = StateObject(wrappedValue: EventPageViewModel(eventStore: eventStore))
+        }
+
     
     var body: some View {
         VStack(alignment: .center) {
@@ -72,11 +81,28 @@ struct EventPageView: View {
             if event is Event {
                 Link("Check out the site for more details!", destination: URL(string: event.url ?? "")!).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
-                
             
+            if let localEvent = event as? LocalEvent {
+                Button(role: .destructive) {
+                    showDeleteAlert = true
+                } label: {
+                    Text(vm.isDeleting ? "Deleting..." : "Delete")
+                }
+                .disabled(vm.isDeleting)
+                .tint(.red)
+                .padding(.bottom, 20)
+                .buttonStyle(.borderedProminent)
+                .alert("Are you sure you want to delete this event?", isPresented: $showDeleteAlert) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Delete", role: .destructive) {
+                        Task {
+                            await vm.delete(event: localEvent)
+                            dismiss()
+                        }
+                    }
+                }
+            }
                 
-                
-                    
             }.frame(minWidth: 380,maxWidth: 380,minHeight: 500 ,alignment: .center)
             .background(RoundedRectangle(cornerRadius: 15)
                 .stroke(Color.gray, lineWidth:1))

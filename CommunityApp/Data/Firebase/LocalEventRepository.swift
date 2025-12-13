@@ -23,6 +23,10 @@ final class EventRepository {
         }
     }
     
+    func deleteEvent(_ event: LocalEvent) async throws {
+            try await db.collection("events").document(event.id).delete()
+        }
+    
     func listenForEvents() -> AsyncStream<[LocalEvent]> {
         AsyncStream { continuation in
             db.collection("events")
