@@ -27,10 +27,16 @@ struct CommunityAppApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
+    @StateObject private var session = SessionManager()
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                MainTabView()
+                //MainTabView()
+                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
+                
+                RootView()
+                    .environmentObject(session)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
