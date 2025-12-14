@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocalEvent: Identifiable, Codable {
+struct LocalEvent: Identifiable, Codable, Equatable {
     var id: String
     var ownerId: String
     var name: String
@@ -19,4 +19,6 @@ struct LocalEvent: Identifiable, Codable {
     var language: [String]
     var time: Date
     var city: String
+    var latitude: Double?
+    var longitude: Double?
 }

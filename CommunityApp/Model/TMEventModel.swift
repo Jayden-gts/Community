@@ -18,7 +18,7 @@ struct EventEmbedded: Decodable {
     
 }
 
-struct Event: Decodable, Identifiable {
+struct Event: Decodable, Identifiable, Equatable {
     let id: String
     let name: String
     let url: String?
@@ -27,6 +27,10 @@ struct Event: Decodable, Identifiable {
     let dates: EventDates?
     let images: [EventImage]?
     let _embedded: EventEmbedded?
+    
+    static func == (lhs: Event, rhs: Event) -> Bool {
+            lhs.id == rhs.id
+        }
 }
 
 struct Venue: Decodable {
