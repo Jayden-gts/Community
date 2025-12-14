@@ -29,7 +29,7 @@ struct Provider: AppIntentTimelineProvider {
         } else {
             // fallback to sample events
             events = (1...configuration.numberOfEvents).map {
-                WidgetEvent(id: "\($0)", name: "Sample Event \($0)", date: Date().addingTimeInterval(Double($0)*3600), imageName: "event\($0)")
+                WidgetEvent(id: "\($0)", name: "Sample Event \($0)", date: Date().addingTimeInterval(Double($0)*3600), imageName: "event\($0)", location: "Location \($0)" )
             }
         }
         let entry = SimpleEntry(date: Date(), events: events, configuration: configuration)
@@ -38,7 +38,7 @@ struct Provider: AppIntentTimelineProvider {
 
     private func sampleEvents(count: Int) -> [WidgetEvent] {
         (1...count).map {
-            WidgetEvent(id: "\($0)", name: "Sample Event \($0)", date: Date().addingTimeInterval(Double($0) * 3600), imageName: "event\($0)")
+            WidgetEvent(id: "\($0)", name: "Sample Event \($0)", date: Date().addingTimeInterval(Double($0) * 3600), imageName: "event\($0)", location: "Location \($0)" )
         }
     }
 }
@@ -49,6 +49,7 @@ struct SimpleEntry: TimelineEntry {
     let events: [WidgetEvent]
     let configuration: ConfigurationAppIntent
 }
+
 
 // MARK: - Widget View
 struct CommunITAppWidgetEntryView: View {
@@ -73,17 +74,26 @@ struct CommunITAppWidgetEntryView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
+                    if let location = event.location {
+                        Text(location)
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                    
                     Divider()
+                        .background(Color.gray.opacity(0.4))
                 }
             }
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemGray6))
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemGray6)) // light neutral background
         )
+        .padding(.horizontal, 8)
     }
 }
+
 
 
 // MARK: - Widget Configuration
@@ -108,9 +118,9 @@ struct CommunITAppWidget: Widget {
     SimpleEntry(
         date: .now,
         events: [
-            WidgetEvent(id: "1", name: "Event 1", date: .now, imageName: "event1"),
-            WidgetEvent(id: "2", name: "Event 2", date: .now.addingTimeInterval(3600), imageName: "event2"),
-            WidgetEvent(id: "3", name: "Event 3", date: .now.addingTimeInterval(7200), imageName: "event3")
+            WidgetEvent(id: "1", name: "Event 1", date: .now, imageName: "event1", location: "Community Hall"),
+            WidgetEvent(id: "2", name: "Event 2", date: .now.addingTimeInterval(3600), imageName: "event2", location: "Library Room 2"),
+            WidgetEvent(id: "3", name: "Event 3", date: .now.addingTimeInterval(7200), imageName: "event3", location: "Gymnasium")
         ],
         configuration: ConfigurationAppIntent()
     )

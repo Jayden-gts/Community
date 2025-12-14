@@ -12,5 +12,8 @@ struct WidgetEvent: Identifiable, Codable {
     let name: String
     let date: Date
     let imageName: String?  // store the name of the image in your Assets
+    
+    let location: String?    // ← add this
+
 
 }

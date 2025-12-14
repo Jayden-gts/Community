@@ -91,7 +91,7 @@ class EventStore: ObservableObject {
     }
     func saveUpcomingEventsToWidget() {
         let widgetEvents: [WidgetEvent] = events.map {
-            WidgetEvent(id: $0.id, name: $0.name, date: $0.date, imageName: "event\($0)")
+            WidgetEvent(id: $0.id, name: $0.name, date: $0.date, imageName: "event\($0)", location: "Location \($0)" )
         }
         if let data = try? JSONEncoder().encode(widgetEvents) {
             sharedDefaults?.set(data, forKey: "upcomingEvents")
