@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EC75E1C2EEE5C4F00250522 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC75E1B2EEE5C4F00250522 /* WidgetKit.framework */; };
+		6EC75E1E2EEE5C4F00250522 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC75E1D2EEE5C4F00250522 /* SwiftUI.framework */; };
+		6EC75E2F2EEE5C5100250522 /* CommunITAppWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6EC75E192EEE5C4F00250522 /* CommunITAppWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C40A3E8C2ECAC17200273EED /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = C40A3E8B2ECAC17200273EED /* FirebaseAI */; };
 		C40A3E8E2ECAC17200273EED /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C40A3E8D2ECAC17200273EED /* FirebaseAnalytics */; };
 		C40A3E902ECAC17200273EED /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = C40A3E8F2ECAC17200273EED /* FirebaseAnalyticsCore */; };
@@ -26,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6EC75E2D2EEE5C5100250522 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C40A3D4A2EC7E35100273EED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EC75E182EEE5C4F00250522;
+			remoteInfo = CommunITAppWidgetExtension;
+		};
 		C40A3D652EC7E35300273EED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C40A3D4A2EC7E35100273EED /* Project object */;
@@ -42,15 +52,61 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6EC75E342EEE5C5100250522 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6EC75E2F2EEE5C5100250522 /* CommunITAppWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		6EC75E192EEE5C4F00250522 /* CommunITAppWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CommunITAppWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EC75E1B2EEE5C4F00250522 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		6EC75E1D2EEE5C4F00250522 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		6EC75E362EEE5C7D00250522 /* CommunITAppWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommunITAppWidgetExtension.entitlements; sourceTree = "<group>"; };
 		C40A3D522EC7E35100273EED /* CommunityApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommunityApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40A3D642EC7E35300273EED /* CommunityAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommunityAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40A3D6E2EC7E35300273EED /* CommunityAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CommunityAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6EC75E302EEE5C5100250522 /* Exceptions for "CommunITAppWidget" folder in "CommunITAppWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6EC75E182EEE5C4F00250522 /* CommunITAppWidgetExtension */;
+		};
+		6EC75E3B2EEE5DE300250522 /* Exceptions for "CommunityApp" folder in "CommunITAppWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/WidgetEvent.swift,
+			);
+			target = 6EC75E182EEE5C4F00250522 /* CommunITAppWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6EC75E1F2EEE5C4F00250522 /* CommunITAppWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6EC75E302EEE5C5100250522 /* Exceptions for "CommunITAppWidget" folder in "CommunITAppWidgetExtension" target */,
+			);
+			path = CommunITAppWidget;
+			sourceTree = "<group>";
+		};
 		C40A3D542EC7E35100273EED /* CommunityApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6EC75E3B2EEE5DE300250522 /* Exceptions for "CommunityApp" folder in "CommunITAppWidgetExtension" target */,
+			);
 			path = CommunityApp;
 			sourceTree = "<group>";
 		};
@@ -67,6 +123,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6EC75E162EEE5C4F00250522 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EC75E1E2EEE5C4F00250522 /* SwiftUI.framework in Frameworks */,
+				6EC75E1C2EEE5C4F00250522 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C40A3D4F2EC7E35100273EED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,12 +172,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6EC75E1A2EEE5C4F00250522 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EC75E1B2EEE5C4F00250522 /* WidgetKit.framework */,
+				6EC75E1D2EEE5C4F00250522 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C40A3D492EC7E35100273EED = {
 			isa = PBXGroup;
 			children = (
+				6EC75E362EEE5C7D00250522 /* CommunITAppWidgetExtension.entitlements */,
 				C40A3D542EC7E35100273EED /* CommunityApp */,
 				C40A3D672EC7E35300273EED /* CommunityAppTests */,
 				C40A3D712EC7E35300273EED /* CommunityAppUITests */,
+				6EC75E1F2EEE5C4F00250522 /* CommunITAppWidget */,
+				6EC75E1A2EEE5C4F00250522 /* Frameworks */,
 				C40A3D532EC7E35100273EED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,6 +200,7 @@
 				C40A3D522EC7E35100273EED /* CommunityApp.app */,
 				C40A3D642EC7E35300273EED /* CommunityAppTests.xctest */,
 				C40A3D6E2EC7E35300273EED /* CommunityAppUITests.xctest */,
+				6EC75E192EEE5C4F00250522 /* CommunITAppWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +208,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6EC75E182EEE5C4F00250522 /* CommunITAppWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EC75E312EEE5C5100250522 /* Build configuration list for PBXNativeTarget "CommunITAppWidgetExtension" */;
+			buildPhases = (
+				6EC75E152EEE5C4F00250522 /* Sources */,
+				6EC75E162EEE5C4F00250522 /* Frameworks */,
+				6EC75E172EEE5C4F00250522 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6EC75E1F2EEE5C4F00250522 /* CommunITAppWidget */,
+			);
+			name = CommunITAppWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = CommunITAppWidgetExtension;
+			productReference = 6EC75E192EEE5C4F00250522 /* CommunITAppWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C40A3D512EC7E35100273EED /* CommunityApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C40A3D782EC7E35300273EED /* Build configuration list for PBXNativeTarget "CommunityApp" */;
@@ -137,10 +237,12 @@
 				C40A3D4E2EC7E35100273EED /* Sources */,
 				C40A3D4F2EC7E35100273EED /* Frameworks */,
 				C40A3D502EC7E35100273EED /* Resources */,
+				6EC75E342EEE5C5100250522 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6EC75E2E2EEE5C5100250522 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C40A3D542EC7E35100273EED /* CommunityApp */,
@@ -221,9 +323,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1640;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					6EC75E182EEE5C4F00250522 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 					C40A3D512EC7E35100273EED = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -257,11 +362,19 @@
 				C40A3D512EC7E35100273EED /* CommunityApp */,
 				C40A3D632EC7E35300273EED /* CommunityAppTests */,
 				C40A3D6D2EC7E35300273EED /* CommunityAppUITests */,
+				6EC75E182EEE5C4F00250522 /* CommunITAppWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6EC75E172EEE5C4F00250522 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C40A3D502EC7E35100273EED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +399,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6EC75E152EEE5C4F00250522 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C40A3D4E2EC7E35100273EED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,6 +430,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6EC75E2E2EEE5C5100250522 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6EC75E182EEE5C4F00250522 /* CommunITAppWidgetExtension */;
+			targetProxy = 6EC75E2D2EEE5C5100250522 /* PBXContainerItemProxy */;
+		};
 		C40A3D662EC7E35300273EED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C40A3D512EC7E35100273EED /* CommunityApp */;
@@ -323,6 +448,70 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6EC75E322EEE5C5100250522 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CommunITAppWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WD68CHX226;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CommunITAppWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CommunITAppWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JaydenSetoApps.CommunityApp.CommunITAppWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6EC75E332EEE5C5100250522 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CommunITAppWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WD68CHX226;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CommunITAppWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CommunITAppWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JaydenSetoApps.CommunityApp.CommunITAppWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C40A3D762EC7E35300273EED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -447,6 +636,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CommunityApp/CommunityApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD68CHX226;
@@ -478,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CommunityApp/CommunityApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD68CHX226;
@@ -575,6 +766,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6EC75E312EEE5C5100250522 /* Build configuration list for PBXNativeTarget "CommunITAppWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EC75E322EEE5C5100250522 /* Debug */,
+				6EC75E332EEE5C5100250522 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C40A3D4D2EC7E35100273EED /* Build configuration list for PBXProject "CommunityApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

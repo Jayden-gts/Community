@@ -11,15 +11,25 @@ import MapKit
 struct MapTabView : View {
     @StateObject var viewModel = MapViewModel()
     
+    @StateObject private var eventStore = EventStore()
+    @StateObject private var eventViewModel = EventViewModel()
+
+    
     var body: some View {
         ZStack {
             // the main map
-            Map(coordinateRegion: $viewModel.region,
+            
+            Map(
+                coordinateRegion: $viewModel.region,
                 showsUserLocation: true,
-                annotationItems: viewModel.userLocation != nil ? [UserLocation(id: UUID(), coordinate:viewModel.userLocation!)] : []) {
-                location in MapMarker(coordinate: location.coordinate, tint: Color.red)
+                annotationItems: viewModel.mapEvents
+            ) { event in
+                MapMarker(
+                    coordinate: event.coordinate,
+                    tint: .red
+                )
             }
-                .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
             
             
             VStack{
@@ -40,18 +50,27 @@ struct MapTabView : View {
             }
         }
         .onAppear {
-            viewModel.checkAuthorizationStatus()
+                    viewModel.checkAuthorizationStatus()
+                    
+                    eventStore.startListening()
+                    
+                    eventViewModel.fetchEvents(city: "Toronto") // or your detected city
+                }
+                .onChange(of: eventStore.events) { _ in
+                    reloadMapPins()
+                }
+                .onChange(of: eventViewModel.events) { _ in
+                    reloadMapPins()
+                }
+            }
+            
+            private func reloadMapPins() {
+                Task {
+                    let allEvents: [any AnyEvent] =
+                    eventStore.events + eventViewModel.events
+                    
+                    await viewModel.loadEventsOnMap(events: allEvents)
+                }
+            }
         }
-    }
-}
-
-struct UserLocation: Identifiable {
-    let id: UUID
-    let coordinate: CLLocationCoordinate2D
-}
-
-struct MapTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapTabView()
-    }
-}
+        

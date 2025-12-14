@@ -11,6 +11,8 @@ import CoreLocation
 
 
 class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published var mapEvents: [MapEvent] = []
+
     @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D( latitude: 43.6532, longitude: -79.3832),
         span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -61,8 +63,49 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         userLocation = first.coordinate
         region = MKCoordinateRegion(
             center: first.coordinate,
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05 )
+            span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1 )
         
         )
     }
-}
+    
+    
+     func loadEventsOnMap(events: [AnyEvent]) async {
+         var results: [MapEvent] = []
+
+         for event in events {
+
+             if let cached = EventCoordinateCache.shared.get(eventId: event.id) {
+                 results.append(
+                     MapEvent(
+                         id: event.id,
+                         name: event.name,
+                         coordinate: cached,
+                         originalEvent: event
+                     )
+                 )
+                 continue
+             }
+
+             let address = event.location
+             guard !address.isEmpty else { continue }
+
+             if let coord = await GeocodingService.shared.geocode(address: address) {
+                 EventCoordinateCache.shared.set(coord, for: event.id)
+
+                 results.append(
+                     MapEvent(
+                         id: event.id,
+                         name: event.name,
+                         coordinate: coord,
+                         originalEvent: event
+                     )
+                 )
+             }
+         }
+
+         self.mapEvents = results
+     }
+     
+     
+ }
+
