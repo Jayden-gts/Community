@@ -2,7 +2,7 @@
 //  MapViewModel.swift
 //  CommunityApp
 //
-//  Created by Laiba Ahmed on 2025-11-18.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 
 import Foundation
@@ -33,7 +33,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
-    // added this might change later ****
     func checkAuthorizationStatus() {
         switch locationManager.authorizationStatus {
         case.notDetermined:
@@ -48,7 +47,6 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     
-    // check this later
     func locationManagerDidChangeAuthorization( _manager: CLLocationManager){
         checkAuthorizationStatus()
     }

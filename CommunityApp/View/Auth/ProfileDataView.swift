@@ -2,14 +2,14 @@
 //  ProfileDataView.swift
 //  CommunityApp
 //
-//  Created by Laiba Ahmed on 2025-12-13.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 
 import SwiftUI
 
 struct ProfileDataView: View {
     @EnvironmentObject var session: SessionManager
-    @Environment(\.dismiss) private var dismiss   // to go back on logout
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(spacing: 30) {
@@ -25,17 +25,8 @@ struct ProfileDataView: View {
                     .bold()
             }
             
-            // User info card
             VStack(alignment: .leading, spacing: 15) {
-//                HStack {
-//                    Text("Name:")
-//                        .font(.headline)
-//                    Spacer()
-//                    TextField("Name", text: session.currentUserName)
-//                        .font(.subheadline)
-//                        .foregroundColor(.secondary)
-//                }
-                
+
                 HStack {
                     Text("Email:")
                         .font(.headline)
@@ -45,7 +36,6 @@ struct ProfileDataView: View {
                         .foregroundColor(.secondary)
                 }
                 
-                // You can add more fields here if needed (phone, etc.)
             }
             .padding()
             .background(Color(.systemGray6))
@@ -53,10 +43,9 @@ struct ProfileDataView: View {
             .shadow(radius: 2)
             .padding(.horizontal)
             
-            // Logout button
             Button(action: {
                 session.logout()
-                dismiss()  // navigate back to login/welcome
+                dismiss()  
             }) {
                 Text("Log Out")
                     .font(.headline)

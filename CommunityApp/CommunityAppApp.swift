@@ -4,6 +4,8 @@
 //
 //  Created by Jayden Seto on 2025-11-14.991746683
 //
+
+
 import Firebase
 import SwiftUI
 import FirebaseCore
@@ -32,9 +34,7 @@ struct CommunityAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                //MainTabView()
-                //.environment(\.managedObjectContext, persistenceController.container.viewContext)
-                
+                 
                 RootView()
                     .environmentObject(session)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)

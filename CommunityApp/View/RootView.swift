@@ -2,7 +2,7 @@
 //  RootView.swift
 //  CommunityApp
 //
-//  Created by Laiba Ahmed on 2025-12-13.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 
 import SwiftUI
@@ -16,10 +16,8 @@ struct RootView: View {
         ZStack {
             if session.isLoggedIn {
                 MainTabView()
-                    //.environmentObject(session)
             } else {
                 LoginView()
-                    //.environmentObject(session)
 
             }
         }

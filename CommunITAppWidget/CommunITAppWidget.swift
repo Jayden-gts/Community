@@ -3,7 +3,7 @@
 //  CommunITAppWidget.swift
 //  CommunITAppWidget
 //
-//  Created by Laiba Ahmed on 2025-12-13.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 //
 
@@ -51,48 +51,48 @@ struct SimpleEntry: TimelineEntry {
 }
 
 
+
 // MARK: - Widget View
 struct CommunITAppWidgetEntryView: View {
     var entry: SimpleEntry
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Upcoming Events")
-                .font(.title3)
-                .bold()
-                .foregroundColor(.primary)
-
-            // Display only 2 events
-            ForEach(entry.events.prefix(2)) { event in
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(event.name)
-                        .font(.headline)
-                        .lineLimit(1)
-                        .foregroundColor(.primary)
+        ZStack {
+            Color(red: 230/255, green: 245/255, blue: 230/255)
+                .cornerRadius(16)
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Upcoming Events")
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(Color(red: 50/255, green: 100/255, blue: 30/255))
+                
+                // Display only 2 events
+                ForEach(entry.events.prefix(2)) { event in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(event.name)
+                            .font(.headline)
+                            .lineLimit(1)
+                            .foregroundColor(Color(red: 50/255, green: 100/255, blue: 30/255))
+                        
+                        Text(event.date, style: .time)
+                            .font(.caption)
+                            .foregroundColor(Color(red: 50/255, green: 100/255, blue: 30/255).opacity(0.8))
+                        
                     
-                    Text(event.date, style: .time)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    
-                    if let location = event.location {
-                        Text(location)
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        Divider()
+                            .background(Color(red: 50/255, green: 100/255, blue: 30/255).opacity(0.5))
                     }
-                    
-                    Divider()
-                        .background(Color.gray.opacity(0.4))
                 }
+                
+                Spacer() // push content to top
             }
+            .padding()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemGray6)) // light neutral background
-        )
-        .padding(.horizontal, 8)
+        .padding(4) // padding around entire widget
     }
 }
+
 
 
 

@@ -2,12 +2,13 @@
 //  AppIntent.swift
 //  CommunITAppWidget
 //
-//  Created by Laiba Ahmed on 2025-12-13.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 
 
 import WidgetKit
 import AppIntents
+
 struct ConfigurationAppIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource { "Upcoming Events Widget" }
     static var description: IntentDescription {

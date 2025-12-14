@@ -2,7 +2,7 @@
 //  SessionManager.swift
 //  CommunityApp
 //
-//  Created by Laiba Ahmed on 2025-12-13.
+//  Created by Laiba Ahmed on 2025-12-13. 991691793
 //
 
 import SwiftUI
@@ -23,15 +23,10 @@ final class SessionManager: ObservableObject {
     }
     
     init() {
-        
-        // TESTING 
-        // Force a fresh test
+
             self.isLoggedIn = false
             self.currentUserEmail = ""
         
-        
-        //self.isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-        //self.userName = UserDefaults.standard.string(forKey: "userName") ?? ""
     }
     
     func login(email: String){
