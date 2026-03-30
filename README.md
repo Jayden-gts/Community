@@ -1,6 +1,6 @@
 Community Events App
 
-This app brings people people together through local and paid community events.
+This app brings people together through local and paid community events.
 
 Description
 
